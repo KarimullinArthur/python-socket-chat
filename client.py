@@ -15,7 +15,7 @@ def handle_messages(connection: socket.socket):
             # so the connection will be closed and an error will be displayed.
             # If not, it will try to decode message in order to show to user.
             if msg:
-                print(msg.decode())
+                print(msg.decode(), end='\n--> ')
             else:
                 connection.close()
                 break
@@ -47,9 +47,12 @@ def client() -> None:
 
         # Read user's input until it quit from chat and close connection
         while True:
-            msg = input()
+            msg = input('--> ')
+            print("\033[A                             \033[A")  # clear input
+            print('\rme: ', msg)
 
             if msg == 'quit':
+                print('Bye!')
                 break
 
             # Parse message to utf-8

@@ -91,7 +91,8 @@ def server() -> None:
             connections.append(socket_connection)
             # Start a new thread to handle client connection and receive it's messages
             # in order to send to others connections
-            threading.Thread(target=handle_user_connection, args=[socket_connection, address]).start()
+            threading.Thread(target=handle_user_connection,
+                             args=[socket_connection, address]).start()
 
     except Exception as e:
         print(f'An error has occurred when instancing socket: {e}')
