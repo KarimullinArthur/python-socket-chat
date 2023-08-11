@@ -15,7 +15,7 @@ def handle_messages(connection: socket.socket):
             # so the connection will be closed and an error will be displayed.
             # If not, it will try to decode message in order to show to user.
             if msg:
-                print(msg.decode(), end='\n--> ')
+                print(f"\r{msg.decode()}", end='\n--> ')
             else:
                 connection.close()
                 break
