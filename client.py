@@ -2,7 +2,7 @@ import socket
 import threading
 
 
-def handle_messages(connection: socket.socket):
+def handle_messages(connection: socket.socket) -> None:
     '''
         Receive messages sent by the server and display them to user
     '''
