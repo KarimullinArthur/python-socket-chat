@@ -1,7 +1,9 @@
-import socket, threading
+import socket
+import threading
 
 # Global variable that mantain client's connections
 connections = []
+
 
 def handle_user_connection(connection: socket.socket, address: str) -> None:
     '''
@@ -18,9 +20,9 @@ def handle_user_connection(connection: socket.socket, address: str) -> None:
             if msg:
                 # Log message sent by user
                 print(f'{address[0]}:{address[1]} - {msg.decode()}')
-                
+
                 # Build message format and broadcast to users connected on server
-                msg_to_send = f'From {address[0]}:{address[1]} - {msg.decode()}'
+                msg_to_send = f"From {address[0]}:{address[1]} - {msg.decode()}"
                 broadcast(msg_to_send, connection)
 
             # Close connection if no message was sent
@@ -29,7 +31,7 @@ def handle_user_connection(connection: socket.socket, address: str) -> None:
                 break
 
         except Exception as e:
-            print(f'Error to handle user connection: {e}')
+            print(f"Error to handle user connection: {e}")
             remove_connection(connection)
             break
 
@@ -49,7 +51,7 @@ def broadcast(message: str, connection: socket.socket) -> None:
 
             # if it fails, there is a chance of socket has died
             except Exception as e:
-                print('Error broadcasting message: {e}')
+                print(f'Error broadcasting message: {e}')
                 remove_connection(client_conn)
 
 
@@ -72,15 +74,15 @@ def server() -> None:
     '''
 
     LISTENING_PORT = 12000
-    
+
     try:
         # Create server and specifying that it can only handle 4 connections by time!
         socket_instance = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         socket_instance.bind(('', LISTENING_PORT))
         socket_instance.listen(4)
 
-        print('Server running!')
-        
+        print("Server running!")
+
         while True:
 
             # Accept client connection
